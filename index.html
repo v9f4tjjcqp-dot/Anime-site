@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiAnime Clone | Licensed Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <style>
+        :root { --accent: #ffdd95; --bg: #121212; --panel: #1f1f1f; }
+        body { background-color: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
+        .sidebar-item:hover { color: var(--accent); background: rgba(255, 221, 149, 0.1); border-right: 3px solid var(--accent); }
+        .glass { background: rgba(0, 0, 0, 0.6); backdrop-blur: 10px; }
+        .watch-btn { background: var(--accent); color: black; transition: 0.3s; }
+        .watch-btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <aside class="w-20 lg:w-64 bg-[#0a0a0a] sticky top-0 h-screen flex flex-col border-r border-white/5 z-50">
+        <div class="p-6 text-2xl font-black text-[#ffdd95] tracking-tighter">HiAnime</div>
+        <nav class="flex-1 mt-4">
+            <a href="#" class="sidebar-item flex items-center p-4 gap-4 transition-all">
+                <i class="fa fa-home w-6"></i> <span class="hidden lg:block">Home</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center p-4 gap-4 transition-all text-[#ffdd95]">
+                <i class="fa fa-fire w-6"></i> <span class="hidden lg:block">Trending</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center p-4 gap-4 transition-all">
+                <i class="fa fa-history w-6"></i> <span class="hidden lg:block">History</span>
+            </a>
+            <a href="#" class="sidebar-item flex items-center p-4 gap-4 transition-all">
+                <i class="fa fa-bookmark w-6"></i> <span class="hidden lg:block">Watch List</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 relative">
+        
+        <header class="p-4 glass sticky top-0 z-40 flex justify-between items-center px-8">
+            <div class="relative w-1/2">
+                <i class="fa fa-search absolute left-4 top-3 text-gray-500"></i>
+                <input type="text" placeholder="Search for your favorite anime..." class="w-full bg-[#2a2a2a] rounded-full py-2 px-12 border border-transparent focus:border-[#ffdd95] outline-none">
+            </div>
+            <div class="flex items-center gap-6">
+                <i class="fa fa-bell text-xl cursor-pointer"></i>
+                <div class="w-10 h-10 rounded-full bg-[#ffdd95] text-black flex items-center justify-center font-bold">User</div>
+            </div>
+        </header>
+
+        <section id="hero" class="relative h-[550px] w-full">
+            <img src="https://images7.alphacoders.com/133/1337424.jpg" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#121212] via-[#121212]/60 to-transparent">
+                <div class="p-12 mt-20 max-w-2xl">
+                    <h2 class="text-white text-7xl font-black mb-4 italic">ATTACK ON TITAN</h2>
+                    <div class="flex gap-4 mb-4 text-sm font-bold">
+                        <span class="text-[#ffdd95]"><i class="fa fa-star"></i> 9.8</span>
+                        <span>Final Season</span>
+                        <span class="bg-white/20 px-2 rounded">Japanese / English</span>
+                    </div>
+                    <p class="text-gray-300 text-lg mb-8">The world's most watched anime. Experience the epic conclusion of the battle between humans and titans.</p>
+                    <button onclick="playAnime()" class="watch-btn px-10 py-4 rounded-full font-black flex items-center gap-3">
+                        <i class="fa fa-play"></i> WATCH EPISODE 1
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="player-section" class="hidden p-8">
+            <div class="bg-black rounded-xl overflow-hidden shadow-2xl border border-white/10">
+                <video id="my-video" class="video-js vjs-big-play-centered w-full h-[600px]" controls preload="auto">
+                    <source src="YOUR_VIDEO_URL_HERE.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <h2 class="text-2xl font-bold mt-6">Attack on Titan - Episode 01: To You, in 2000 Years</h2>
+        </section>
+
+        <section class="p-8">
+            <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                <span class="w-1 h-6 bg-[#ffdd95] rounded"></span> Recommended for You
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg aspect-[2/3]">
+                        <img src="https://m.media-amazon.com/images/I/81S6U2TccJL._AC_UF894,1000_QL80_.jpg" class="h-full w-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 text-[10px] rounded">SUB | DUB</div>
+                    </div>
+                    <h4 class="mt-3 font-semibold group-hover:text-[#ffdd95]">Jujutsu Kaisen</h4>
+                </div>
+                </div>
+        </section>
+
+    </main>
+
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script>
+        function playAnime() {
+            document.getElementById('hero').classList.add('hidden');
+            document.getElementById('player-section').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
